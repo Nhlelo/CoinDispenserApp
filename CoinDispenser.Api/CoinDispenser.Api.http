@@ -1,0 +1,6 @@
+@CoinDispenser.Api_HostAddress = http://localhost:5156
+
+GET {{CoinDispenser.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
