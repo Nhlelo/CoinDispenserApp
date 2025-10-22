@@ -14,4 +14,9 @@
     <ProjectReference Include="..\CoinDispenser.Core\CoinDispenser.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="DTOs\" />
+  </ItemGroup>
+
 </Project>
