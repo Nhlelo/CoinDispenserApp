@@ -1,10 +1,43 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Coin Dispenser";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="card card-result mb-4">
+    <div class="card-body">
+        <form method="post" novalidate>
+            <div class="mb-3">
+                <label class="form-label">Denominations (comma separated)</label>
+                <input asp-for="DenominationsInput" class="form-control" />
+                <span asp-validation-for="DenominationsInput" class="text-danger small"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Amount</label>
+                <input asp-for="Amount" class="form-control" />
+                <span asp-validation-for="Amount" class="text-danger small"></span>
+            </div>
+            <button class="btn btn-primary">Compute</button>
+        </form>
+    </div>
 </div>
+
+@if (Model.ErrorMessage != null)
+{
+    <div class="error-box">@Model.ErrorMessage</div>
+}
+else if (Model.Result != null)
+{
+    <div class="card card-result">
+        <div class="card-body">
+            <h5 class="card-title">Result</h5>
+            <p class="mb-2"><strong>Minimum coins required:</strong> @Model.Result.TotalCoins</p>
+            <ul class="coin-list">
+                @foreach (var kv in Model.Result.Coins.OrderByDescending(k => k.Key))
+                {
+                    <li><span class="coin-denom">Coin @kv.Key</span><span>@kv.Value</span></li>
+                }
+            </ul>
+        </div>
+    </div>
+}
